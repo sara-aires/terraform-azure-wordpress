@@ -4,7 +4,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "wordpress-rg"
-  location = "West Europe"
+  location = ""
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -40,10 +40,6 @@ resource "azurerm_public_ip" "public_ip" {
   allocation_method   = "Dynamic"
 }
 
-resource "azurerm_network_interface" "nic" {
-  name                = "wordpress-nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
     name                          = "internal"
@@ -75,9 +71,9 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {
-    computer_name  = "wordpressvm"
-    admin_username = var.admin_username
-    admin_password = var.admin_password
+    computer_name  = "maquiv"
+    admin_username = admin
+    admin_password = admin
   }
 
   os_profile_linux_config {
@@ -95,7 +91,7 @@ resource "azurerm_virtual_machine" "vm" {
       "sudo systemctl start docker",
       "sudo systemctl enable docker",
       "sudo usermod -aG docker ${var.admin_username}",
-      "curl -L \"https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+      "curl -L \"docker-compose.yml",
       "chmod +x /usr/local/bin/docker-compose",
       "sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose",
       "mkdir /home/${var.admin_username}/wordpress",
