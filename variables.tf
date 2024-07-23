@@ -1,11 +1,11 @@
 variable "admin_username" {
-  description = "The admin username for the VM"
+  description = "admin"
   type        = string
   default     = "azureuser"
 }
 
 variable "admin_password" {
-  description = "The admin password for the VM"
+  description = "adminpaass"
   type        = string
-  default     = "Password1234!"
+  default     = "seenha1323"
 }
